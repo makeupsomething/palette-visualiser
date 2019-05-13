@@ -1,3 +1,5 @@
+import Values from 'values.js'
+
 export const lightenDarkenColor = (col, amt) => {
 	var usePound = false
 
@@ -24,4 +26,13 @@ export const lightenDarkenColor = (col, amt) => {
 	else if (g < 0) g = 0
 
 	return (usePound ? '#' : '') + (g | (b << 8) | (r << 16)).toString(16)
+}
+
+export const generateShades = (baseColor) => {
+	const color = new Values(baseColor).all(20)
+	return color
+		.map((c) => {
+			return `#${c.hex}`
+		})
+		.splice(0, 10)
 }
